@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
+const config = require('config');
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -9,12 +10,9 @@ app.use(express.json());
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
 
-// Your route handlers and other middleware here
-
-const items = require('./routes/api/items');
 
 // Db Config
-const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI');
 
 // Connect to Mongo
 mongoose
@@ -23,7 +21,9 @@ mongoose
     .catch(err => console.log(err));
 
 // Use Routes
-app.use('/api/items', items);
+app.use('/api/items', require('./routes/api/items'));
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 app.use(express.static(path.join(__dirname, "./client/build")));
 app.get("*", function (_, res) {

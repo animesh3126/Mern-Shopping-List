@@ -13,8 +13,11 @@
   "author": "Animesh Shah",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "concurrently": "^8.2.2",
+    "config": "^3.3.11",
     "express": "^4.18.3",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.1"
   },
